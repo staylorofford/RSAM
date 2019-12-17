@@ -10,7 +10,6 @@ import numpy as np
 import sys
 import os
 from obspy.core import read, Trace, Stream
-from obspy.signal import cosTaper
 import datetime as dt
 import urllib
 
@@ -52,7 +51,7 @@ datafile = os.path.join(data_dir, name)
 
 # check if data file exists
 if not os.path.isfile(datafile):
-    print "datafile %s not found" % datafile
+    print("datafile %s not found" % datafile)
     sys.exit
 
 # read input data file

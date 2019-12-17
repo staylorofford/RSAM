@@ -27,7 +27,7 @@ else:
     year1 = int(sys.argv[3])
     year2 = int(sys.argv[4])
     plot_dir = sys.argv[5]
-    plot_file = os.path.join(plot_dir, 'rsam_plot_day.png')
+    plot_file = os.path.join(plot_dir, 'rsam_plot_day')
 if len(sys.argv) == 7:  # filter = none
     filtype = sys.argv[6]
 elif len(sys.argv) == 8:  # filter = lp or hp, one frequency given
@@ -82,6 +82,19 @@ end = date2num(tr.stats.endtime.datetime)
 # time values
 t = sp.linspace(start, end, tr.stats.npts)
 
+# parse VAL data
+val_changes, val_level_at_change = [], []
+with open('/home/samto/PROCESSING/WIR/calendar_VAB.csv', 'r') as openfile:
+    rc = 0
+    for row in openfile:
+        if rc == 0:
+            rc += 1
+            continue
+        cols = row.split(',')
+        val_changes.append(dt.datetime.strptime(cols[1] + '-' + cols[0],
+                                                      '%Y-%b-%d'))
+        val_level_at_change.append(cols[2])
+
 # plot
 #date and time
 now = dt.datetime.now()
@@ -113,10 +126,19 @@ ax.xaxis.set_minor_locator(minormonths)
 ax.grid(True)
 
 maxy = 1.1 * tr.data.max()
-plt.ylim(ymin=0, ymax=maxy)
+plt.ylim(bottom=0, top=maxy)
+
+plt.plot_date(t, tr.data, linestyle='-', marker='None', color='red')
+
+# Plot VAL calendar
+plt.vlines(val_changes, 0, 999999, linestyles='dashed', color='black')
+for n in range(len(val_changes)):
+    plt.text(val_changes[n] + dt.timedelta(weeks=3), maxy - maxy/10, 'VAL ' + val_level_at_change[n], rotation=90)
 
 plt.title(title)
 plt.ylabel('Ground Velocity (nm/s)')
-plt.plot_date(t, tr.data, linestyle='-', marker='None', color='red')
-plt.savefig(plot_file, dpi=200)
+plt.xlim(t[0], t[-1])
+
+plt.savefig(plot_file + '.png', dpi=600, fmt='png')
+plt.savefig(plot_file + '.svg', dpi=600, fmt='svg')
 # plt.show()

@@ -29,24 +29,7 @@ while [ $# -gt 0 ]
 echo processing date: $date
 
 #WSRZ.10-HHZ.RT
-rsam_fdsn.py WSRZ.10-HHZ.NZ ./sds $date ./workdir resp bp 2 5
+python ./rsam_fdsn.py WSRZ.10-HHZ.NZ ./sds $date ./workdir resp bp 2 5
 
 #WIZ.10-HHZ.RT
-rsam_fdsn.py WIZ.10-HHZ.NZ ./sds $date ./workdir resp bp 2 5
-
-#DRZ.10-EHZ.CH
-rsam_fdsn.py DRZ.10-EHZ.NZ ./sds $date ./workdir resp bp 1 4
-
-#MAVZ.10-HHZ.CH
-rsam_fdsn.py MAVZ.10-HHZ.NZ ./sds $date ./workdir resp bp 1 4
-
-#TRVZ.10-HHZ.CH
-rsam_fdsn.py TRVZ.10-HHZ.NZ ./sds $date ./workdir resp bp 1 4
-
-#WHVZ.10-HHZ.CH
-rsam_fdsn.py WHVZ.10-HHZ.NZ ./sds $date ./workdir resp bp 1 4
-
-#RAR.10-BHZ.IU
-#geonet has no response data for RAR
-rsam_fdsn.py RAR.10-BHZ.IU ./sds $date ./workdir noresp bp 1.5 6
-
+python ./rsam_fdsn.py WIZ.10-HHZ.NZ ./sds $date ./workdir resp bp 2 5
