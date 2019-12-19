@@ -150,9 +150,9 @@ if basetrig != 'null':
   half = bt / 2
   plt.axhline(y=bt, linestyle='--', color = 'red', label='RSAM alert value')
   #colour areas based on relation to BTL
-  plt.axhspan(0, half, alpha=0.1, color='green', label='Green RSAM zone') #low rectangle
-  plt.axhspan(half, bt, alpha=0.1, color='orange', label='Orange RSAM zone') #moderate rectangle
-  plt.axhspan(bt, 100000, alpha=0.1, color='red', label='Red RSAM zone') #high rectangle
+  plt.axhspan(0, half, alpha=0.1, color='green', label='Weak RSAM zone') #low rectangle
+  plt.axhspan(half, bt, alpha=0.1, color='orange', label='Moderate RSAM zone') #moderate rectangle
+  plt.axhspan(bt, 100000, alpha=0.1, color='red', label='Strong RSAM zone') #high rectangle
 
 plt.plot_date(t, tr.data, linewidth=1, linestyle='-', marker='None', color='black', label='RSAM')
 
@@ -207,7 +207,7 @@ plt.text(s='Eruption',
                    'color': 'red'})
 
 # plt.title(title)
-plt.title('RSAM at ' + site + ' between frequencies ' + strf1 + '-' + strf2 + ' Hz',
+plt.title('Real-Time Seismic Amplitude (RSAM: a measure of seismic energy) at Whakaari/White Island in the last month',
           y=1.03,
           fontdict={'fontsize': 14})
 plt.yticks(plt.gca().get_yticks(),
@@ -220,7 +220,7 @@ plt.xticks(ticks=xticks,
            rotation=30,
            ha='right',
            fontsize=12)
-plt.xlabel('time',
+plt.xlabel('date (NZT)',
            fontsize=14,
            labelpad=5)
 plt.xlim(t[0], t[-1])
