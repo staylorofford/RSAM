@@ -100,8 +100,7 @@ for n in range(num_calculation_days + 1):
                                               endtime=end,
                                               attach_response=True)
                 except:  # If this fails, the data does not exist
-                    sys.stderr.write('No data found for ' + stream + ' on date ' + str(start)[:10] + '\n')
-                    sys.exit(0)
+                    print('No data found for ' + stream + ' on date ' + str(start)[:10] + '\n')
         else:
             raise Exception('This code only has functionality for data from the NZ network.')
 
@@ -503,4 +502,3 @@ for stream in streams:
     plt.savefig('./output/' + stream.split('.')[1] + '.rsam_plot_' + str(num_plot_days) + '_days.png',
                 dpi=400,
                 fmt='png')
-
